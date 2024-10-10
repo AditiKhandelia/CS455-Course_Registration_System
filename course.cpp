@@ -126,6 +126,10 @@ class CourseStore
             cout << "Min Credits : " << course.minCredits << endl;
         }
     }
+    int getCourseCount()
+    {
+        return courses.size();
+    }
     Course getCourse(int courseID)
     {
         return courses[courseID - 1];

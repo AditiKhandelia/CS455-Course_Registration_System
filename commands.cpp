@@ -105,16 +105,26 @@ class RegisterCourseCommand : public Command
     public:
     void execute() override
     {
-        acceptUserInput();
+        int courseCount = CourseStore::getInstance()->getCourseCount();
+        acceptCourseID(courseCount);
+        acceptCredits();
         ScheduleBuilder* scheduler = ScheduleBuilder::getInstance();
         scheduler->registerCourse(courseID, credits);
     }
-    void acceptUserInput()
+    void acceptCourseID(int courseCount)
     {
         printDelimiter();
         cout << "Enter the course ID: ";
         cin >> courseID;
-        cout << "Enter the number of credits: ";
+        if(courseID < 1 || courseID > courseCount)
+        {
+            cout << "Invalid course ID. Please try again." << endl;
+            acceptCourseID(courseCount);
+        }
+    }
+    void acceptCredits()
+    {
+        cout << "Enter the credits: ";
         cin >> credits;
     }
     ~RegisterCourseCommand() override
