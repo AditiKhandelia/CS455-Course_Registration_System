@@ -16,26 +16,15 @@
 #include <utility>
 #include <unordered_map>
 
-extern void printDelimiter();
-
 #include "scheduler.cpp"
 #include "course.cpp"
+
+extern void printDelimiter();
 
 using namespace std;
 
 class Command
 {
-    protected:
-    void printSuccessMessage()
-    {
-        printDelimiter();
-        cout << "Operation successful." << endl;
-    }
-    void printFailureMessage()
-    {
-        printDelimiter();
-        cout << "Operation failed." << endl;
-    }
     public:
     virtual ~Command(); 
     virtual void execute() = 0;
@@ -66,7 +55,8 @@ class AddCourseCommand : public Command
     {
         printDelimiter();
         cout << "Enter the course name: ";
-        cin >> courseName;
+        cin.ignore();
+        std::getline(cin, courseName);
         cout << "Enter the minimum credits: ";
         cin >> minCredits;
         cout << "Enter the maximum credits: ";
@@ -78,7 +68,6 @@ class AddCourseCommand : public Command
     }
     int acceptTime()
     {
-        // time should be an integer in 24-hour format
         int time;
         cin >> time;
         if(time < 0 || time > 23)
@@ -119,7 +108,6 @@ class RegisterCourseCommand : public Command
         acceptUserInput();
         ScheduleBuilder* scheduler = ScheduleBuilder::getInstance();
         scheduler->registerCourse(courseID, credits);
-        printSuccessMessage();
     }
     void acceptUserInput()
     {

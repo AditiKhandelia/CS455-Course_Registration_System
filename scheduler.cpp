@@ -44,7 +44,6 @@ class Schedule
         cout << "Schedule:" << endl;
         for(int i = 0; i < courses.size(); i++)
         {
-            printDelimiter();
             courses[i].displayCourse();
             cout << "Credits: " << courses[i].appliedCredits << endl;
         }
