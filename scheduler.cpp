@@ -34,6 +34,12 @@ class Schedule
     }
     void displaySchedule()
     {
+        if(courses.size() == 0)
+        {
+            printDelimiter();
+            cout << "No courses in schedule." << endl;
+            return;
+        }
         printDelimiter();
         cout << "Schedule:" << endl;
         for(int i = 0; i < courses.size(); i++)

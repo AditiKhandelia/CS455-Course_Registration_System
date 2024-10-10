@@ -113,6 +113,12 @@ class CourseStore
     }
     void displayOfferedCourses()
     {
+        if(courses.size() == 0)
+        {
+            printDelimiter();
+            cout << "No courses available." << endl;
+            return;
+        }
         for(Course course : courses)
         {
             course.displayCourse();
